@@ -47,9 +47,23 @@ class Emergency implements \JsonSerializable
     /**
      * @var EmergencyType[]|Collection
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Skill", inversedBy="emergencies", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\EmergencyType", inversedBy="emergencies", cascade={"persist"})
      */
     private $emergencyType;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $lat;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $lon;
 
     /**
      * Volunteer constructor.
@@ -58,8 +72,6 @@ class Emergency implements \JsonSerializable
     {
         $this->created = new \DateTime();
     }
-
-
 
     /**
      * Get id
@@ -125,6 +137,54 @@ class Emergency implements \JsonSerializable
     public function setSkills($skills)
     {
         $this->skills = $skills;
+    }
+
+    /**
+     * @return EmergencyType[]|Collection
+     */
+    public function getEmergencyType()
+    {
+        return $this->emergencyType;
+    }
+
+    /**
+     * @param EmergencyType[]|Collection $emergencyType
+     */
+    public function setEmergencyType($emergencyType)
+    {
+        $this->emergencyType = $emergencyType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    /**
+     * @param string $lat
+     */
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLon()
+    {
+        return $this->lon;
+    }
+
+    /**
+     * @param string $lon
+     */
+    public function setLon($lon)
+    {
+        $this->lon = $lon;
     }
 
     public function jsonSerialize()
