@@ -27,13 +27,17 @@
         {% for report in reports %}
             <tr id="marker{{ loop.index }}">
                 <td>{{ report.id }}</td>
-                <td>{% if report.created %}{{ report.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if report.created %}{{ report.created|localizeddate('medium', 'short') }}{% endif %}</td>
                 <td>{{ report.description }}</td>
                 <td>{{ report.lat }}</td>
                 <td>{{ report.lng }}</td>
                 <td>{{ report.ip }}</td>
                 <td>{{ report.userAgent }}</td>
                 <td>
+                    <a class="btn btn-primary btn-xs panTo" data-marker="{{ loop.index }}" href="">
+                        <i class="fa fa-picture-o"></i>
+                        View Photo
+                    </a>
                     <a class="btn btn-primary btn-xs panTo" data-marker="{{ loop.index }}" href="">
                         <i class="fa fa-map-marker"></i>
                         Highlight on map
@@ -49,14 +53,13 @@
     </table>
 </div>
 
-<div class="ga" id="map" style="margin-left: -10px; margin-right: -10px; height: 50vh;">
+<div class="ga" id="map" style="border:solid 2px #ccc; height: 50vh; margin-bottom: 19px;">
 
 </div>
 
+    <div style="padding-top: 1px;"></div>
+
     <style>
-        .right_col {
-            padding-bottom: 0;
-        }
         tr.highlight,
         tr.highlight td {
             background: #f00;
