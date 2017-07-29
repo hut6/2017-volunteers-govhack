@@ -78,12 +78,23 @@ class EmergencyController extends AppController
      */
     public function editAction(Request $request, Emergency $emergency)
     {
+
         $editForm = $this->createForm('AppBundle\Form\EmergencyType', $emergency);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
-            $this->getDoctrine()->getManager()->flush();
+            $volunteers = $this->em()->getRepository("AppBundle:Volunteer")->findUnenrolledBySkills($emergency, $emergency->getSkills());
+
+            foreach ($volunteers as $volunteer) {
+                $enrolment = new VolunteerEnrolment(
+                    $emergency,
+                    $volunteer
+                );
+                $this->em()->persist($enrolment);
+            }
+
+            $this->em()->flush();
 
             return $this->redirectToRoute('app_enrolment_list', ["id" => $emergency->getId()]);
         }

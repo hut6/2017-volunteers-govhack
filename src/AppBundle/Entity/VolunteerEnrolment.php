@@ -30,7 +30,7 @@ class VolunteerEnrolment
     /**
      * @var Volunteer $volunteer
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Volunteer")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Volunteer", inversedBy="enrolments")
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $volunteer;
@@ -40,6 +40,34 @@ class VolunteerEnrolment
      * @ORM\Column(type="datetime")
      */
     private $created;
+
+    /**
+     * @var boolean $canDoIt
+     *
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $canDoIt;
+
+    /**
+     * @var boolean $canDoItDateTime
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $canDoItDateTime;
+
+    /**
+     * @var boolean $cconfirmed
+     *
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $confirmed;
+
+    /**
+     * @var boolean $confirmedDateTime
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $confirmedDateTime;
 
     /**
      * VolunteerEnrolment constructor.
@@ -110,6 +138,70 @@ class VolunteerEnrolment
     public function setCreated($created)
     {
         $this->created = $created;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCanDoIt()
+    {
+        return $this->canDoIt;
+    }
+
+    /**
+     * @param bool $canDoIt
+     */
+    public function setCanDoIt($canDoIt)
+    {
+        $this->canDoIt = $canDoIt;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCanDoItDateTime()
+    {
+        return $this->canDoItDateTime;
+    }
+
+    /**
+     * @param bool $canDoItDateTime
+     */
+    public function setCanDoItDateTime($canDoItDateTime)
+    {
+        $this->canDoItDateTime = $canDoItDateTime;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isConfirmed()
+    {
+        return $this->confirmed;
+    }
+
+    /**
+     * @param bool $confirmed
+     */
+    public function setConfirmed($confirmed)
+    {
+        $this->confirmed = $confirmed;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isConfirmedDateTime()
+    {
+        return $this->confirmedDateTime;
+    }
+
+    /**
+     * @param bool $confirmedDateTime
+     */
+    public function setConfirmedDateTime($confirmedDateTime)
+    {
+        $this->confirmedDateTime = $confirmedDateTime;
     }
 
 }

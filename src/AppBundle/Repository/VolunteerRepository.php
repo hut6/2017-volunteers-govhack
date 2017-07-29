@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Repository;
+use AppBundle\Entity\Emergency;
 use Doctrine\Common\Collections\Collection;
 
 /**
@@ -13,10 +14,42 @@ class VolunteerRepository extends \Doctrine\ORM\EntityRepository
 {
     public function findBySkills(Collection $kills)
     {
-        $this->createQueryBuilder("vol")
-            ->where("vol.skills IN (:skills)")->setParameter('skills', $kills)
+        return $this->createQueryBuilder("vol")
+            ->innerJoin("vol.skills", 'skills')
+            ->where("skills IN (:skills)")->setParameter('skills', $kills)
             ->getQuery()
             ->execute()
-        ;
+            ;
     }
+
+    public function findUnenrolledBySkills(Emergency $emergency, Collection $kills)
+    {
+
+        $ids = $this->getEnrolledVolunteers($emergency);
+
+        $ids = count($ids) ? $ids : [-1];
+
+        return $this->createQueryBuilder("vol")
+            ->innerJoin("vol.skills", 'skills')
+            ->where("skills IN (:skills)")->setParameter('skills', $kills)
+            ->andWhere('vol.id NOT IN (:exclude)')->setParameter('exclude', $ids)
+            ->getQuery()
+            ->execute()
+            ;
+    }
+
+    public function getEnrolledVolunteers (Emergency $emergency) {
+
+        $results = $this->createQueryBuilder("vol")
+            ->select("vol.id")
+            ->innerJoin("vol.enrolments", 'enrol')
+            ->where("enrol.emergency = :emergency")->setParameter('emergency', $emergency)
+            ->getQuery()
+            ->getScalarResult()
+            ;
+
+        return array_column($results, 'id');
+
+    }
+
 }

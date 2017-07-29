@@ -51,6 +51,13 @@ class Volunteer implements \JsonSerializable
     private $skills;
 
     /**
+     * @var VolunteerEnrolment[]|Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\VolunteerEnrolment", mappedBy="volunteer", cascade={"persist"})
+     */
+    private $enrolments;
+
+    /**
      * Volunteer constructor.
      */
     public function __construct()
@@ -140,5 +147,22 @@ class Volunteer implements \JsonSerializable
             'skills' => $this->getSkills(),
         ];
     }
+
+    /**
+     * @return VolunteerEnrolment[]|Collection
+     */
+    public function getEnrolments()
+    {
+        return $this->enrolments;
+    }
+
+    /**
+     * @param VolunteerEnrolment[]|Collection $enrolments
+     */
+    public function setEnrolments($enrolments)
+    {
+        $this->enrolments = $enrolments;
+    }
+
 }
 
