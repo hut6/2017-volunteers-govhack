@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Emergency;
+use AppBundle\Entity\VolunteerEnrolment;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
 
@@ -43,14 +44,19 @@ class EmergencyController extends AppController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($emergency);
 
-            $volunteers = $em->getRepository("AppBundle:Volunteer")->findBy([
-                "skills" => $emergency->getSkills()
-            ]);
+            $volunteers = $em->getRepository("AppBundle:Volunteer")->findBySkills($emergency->getSkills());
 
-//            foreach ()
+            foreach ($volunteers as $volunteer) {
+                $enrolment = new VolunteerEnrolment(
+                    $emergency,
+                    $volunteer
+                );
+                $em->persist($enrolment);
+            }
 
             $em->flush();
 
@@ -75,9 +81,10 @@ class EmergencyController extends AppController
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('emergency_edit', array('id' => $emergency->getId()));
+            return $this->redirectToRoute('emergency_index');
         }
 
         return $this->render('emergency/edit.html.twig', array(
