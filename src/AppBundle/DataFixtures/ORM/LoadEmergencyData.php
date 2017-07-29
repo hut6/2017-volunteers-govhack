@@ -26,6 +26,10 @@ class LoadEmergencyData extends AbstractFixture implements OrderedFixtureInterfa
             $emergency->setEmergencyType(
                 $manager->find(EmergencyType::class, 1)
             );
+            $emergency->setSkills([
+                $manager->find(Skill::class, mt_rand(1,4)),
+                $manager->find(Skill::class, mt_rand(5,8)),
+            ]);
             $manager->persist($emergency);
         }
 
