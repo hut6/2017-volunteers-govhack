@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="volunteer")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\VolunteerRepository")
  */
-class Volunteer
+class Volunteer implements \JsonSerializable
 {
     /**
      * @var int
@@ -132,6 +132,13 @@ class Volunteer
         $this->skills = $skills;
     }
 
-
+    public function jsonSerialize()
+    {
+        return [
+            'name' => $this->getName(),
+            'email' => $this->getEmail(),
+            'skills' => $this->getSkills(),
+        ];
+    }
 }
 

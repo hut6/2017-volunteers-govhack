@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Emergency;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
 
@@ -12,7 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  *
  * @Route("emergency")
  */
-class EmergencyController extends Controller
+class EmergencyController extends AppController
 {
     /**
      * Lists all emergency entities.
@@ -24,7 +23,7 @@ class EmergencyController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $emergencies = $em->getRepository('AppBundle:Emergency')->findAll();
+        $emergencies = $em->getRepository(Emergency::class)->findAll();
 
         return $this->render('emergency/index.html.twig', array(
             'emergencies' => $emergencies,

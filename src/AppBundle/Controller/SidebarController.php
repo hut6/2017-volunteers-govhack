@@ -8,14 +8,13 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * SidebarController.
  */
-class SidebarController extends Controller
+class SidebarController extends AppController
 {
     /**
      * @Route("/", name="app_dashboard")

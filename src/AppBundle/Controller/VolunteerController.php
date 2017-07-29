@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Volunteer;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
 
@@ -12,7 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  *
  * @Route("volunteer")
  */
-class VolunteerController extends Controller
+class VolunteerController extends AppController
 {
     /**
      * Lists all volunteer entities.
@@ -24,7 +23,7 @@ class VolunteerController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $volunteers = $em->getRepository('AppBundle:Volunteer')->findAll();
+        $volunteers = $em->getRepository(Volunteer::class)->findAll();
 
         return $this->render('volunteer/index.html.twig', array(
             'volunteers' => $volunteers,
