@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Emergency;
 use AppBundle\Entity\Notification;
+use AppBundle\Entity\Report;
 use AppBundle\Entity\Volunteer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -65,6 +66,16 @@ class DataController extends AppController
     public function listEmergenciesAction()
     {
         $data = $this->em()->getRepository(Emergency::class)->findAll();
+        return $this->renderJSON($data);
+    }
+
+    /**
+     * @Route("/reports", name="api_reports_list")
+     * @Method("GET")
+     */
+    public function listReportsAction()
+    {
+        $data = $this->em()->getRepository(Report::class)->findAll();
         return $this->renderJSON($data);
     }
 }

@@ -169,5 +169,18 @@ class Report
         $this->description = $description;
     }
 
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'description' => $this->getDescription(),
+            'created' => $this->getCreated(),
+            'lat' => $this->getLat(),
+            'lon' => $this->getLng(),
+        ];
+    }
+
 }
 

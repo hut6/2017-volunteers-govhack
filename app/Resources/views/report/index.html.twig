@@ -13,6 +13,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
+                <th>Report #</th>
                 <th>Date / Time Reported</th>
                 <th>Description</th>
                 <th>Lat</th>
@@ -24,7 +25,8 @@
         </thead>
         <tbody>
         {% for report in reports %}
-            <tr>
+            <tr id="marker{{ loop.index }}">
+                <td>{{ report.id }}</td>
                 <td>{% if report.created %}{{ report.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ report.description }}</td>
                 <td>{{ report.lat }}</td>
@@ -32,7 +34,7 @@
                 <td>{{ report.ip }}</td>
                 <td>{{ report.userAgent }}</td>
                 <td>
-                    <a class="btn btn-primary btn-xs" href="{{ path('report_edit', { 'id': report.id }) }}">
+                    <a class="btn btn-primary btn-xs" data-marker="{{ loop.index }}" href="">
                         <i class="fa fa-map-marker"></i>
                         Highlight on map
                     </a>
@@ -55,6 +57,10 @@
         .right_col {
             padding-bottom: 0;
         }
+        tr.highlight,
+        tr.highlight td {
+            background: #f00;
+        }
     </style>
 
 {% endblock %}
@@ -64,18 +70,49 @@
 {{ parent() }}
 
 <script>
+
+    var markers = [];
+    var map;
+
+    function addMarker (lat, lng, title) {
+
+        var markerLoc = new google.maps.LatLng(lat, lng);
+
+        var marker = new google.maps.Marker({
+            map: map,
+            position: markerLoc,
+            title: title
+        });
+
+        marker.addListener('click', function() {
+            $('tr.highlight').removeClass("highlight");
+            $("#marker"+marker.get('id')).addClass("highlight");
+        });
+
+        markers.push(marker);
+    }
+
     function initMap() {
 
-        var map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('map'), {
             zoom: 10,
             scrollwheel: false,
             center: {lat: -23.69, lng: 133.88}
         });
 
-        var marker = new google.maps.Marker({
-            position: {lat: -23.69, lng: 133.88},
-            map: map
-        });
+        {% for report in reports %}
+            addMarker ({{ report.lat }}, {{ report.lng }}, "Report #{{ report.id }}");
+        {% endfor %}
+
+        var bounds = new google.maps.LatLngBounds();
+
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].set("id", i);
+            bounds.extend(markers[i].getPosition());
+        }
+
+        map.fitBounds(bounds);
+
     }
 </script>
 <script async defer
