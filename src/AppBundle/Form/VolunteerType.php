@@ -16,6 +16,7 @@ class VolunteerType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('phone')
             ->add('email')
             ->add('skills', EntityType::class, array(
                 'class' => 'AppBundle\Entity\Skill',

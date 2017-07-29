@@ -52,6 +52,13 @@ class Emergency implements \JsonSerializable
     private $emergencyType;
 
     /**
+     * @var VolunteerEnrolment[]|Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\VolunteerEnrolment", mappedBy="emergency", cascade={"persist"})
+     */
+    private $enrolments;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -194,6 +201,22 @@ class Emergency implements \JsonSerializable
             'skills' => $this->getSkills(),
             'created' => $this->getCreated(),
         ];
+    }
+
+    /**
+     * @return VolunteerEnrolment[]|Collection
+     */
+    public function getEnrolments()
+    {
+        return $this->enrolments;
+    }
+
+    /**
+     * @param VolunteerEnrolment[]|Collection $enrolments
+     */
+    public function setEnrolments($enrolments)
+    {
+        $this->enrolments = $enrolments;
     }
 
 }

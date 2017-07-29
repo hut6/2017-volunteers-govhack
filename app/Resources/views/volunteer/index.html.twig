@@ -7,6 +7,7 @@
             <tr>
                 <th>Date joined</th>
                 <th>Name</th>
+                <th>Phone</th>
                 <th>Email</th>
                 <th>Skills</th>
                 <th>Actions</th>
@@ -16,8 +17,15 @@
         {% for volunteer in volunteers %}
             <tr>
                 <td>{% if volunteer.created %}{{ volunteer.created|localizeddate('medium', 'none') }}{% endif %}</td>
-                <td>{{ volunteer.name }}</td>
-                <td>{{ volunteer.email }}</td>
+                <td>
+                    {{ volunteer.name }}
+                </td>
+                <td>
+                    <a href="tel:{{ volunteer.phone }}">{{ volunteer.phone }}</a>
+                </td>
+                <td>
+                    <a href="mailto:{{ volunteer.email }}">{{ volunteer.email }}</a>
+                </td>
                 <td>{{ volunteer.skills|join(', ') }}</td>
                 <td>
                     <a class="btn btn-success btn-xs" href="{{ path('volunteer_edit', { 'id': volunteer.id }) }}">

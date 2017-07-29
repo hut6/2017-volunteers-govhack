@@ -18,6 +18,7 @@ switch ($server) {
     case '0.0.0.0':
         $kernel = new AppKernel('prod', false);
         break;
+    case 'volunteers-backend.dw.gg':
     case '2017-volunteers-govhack.dw.gg':
         $kernel = new AppKernel('dev', true);
         break;

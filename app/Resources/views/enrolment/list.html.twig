@@ -2,6 +2,62 @@
 
 {% block page_content %}
 
-aaa
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Notified</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Skills</th>
+            <th>Responded</th>
+            <th>Confirmed</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for enrolment in emergency.enrolments %}
+            {% set volunteer = enrolment.volunteer %}
+            <tr>
+                <td>{% if enrolment.created %}{{ enrolment.created|localizeddate('medium', 'medium') }}{% endif %}</td>
+                <td>{{ volunteer.name }}</td>
+                <td>
+                    <a href="tel:{{ volunteer.phone }}">{{ volunteer.phone }}</a>
+                </td>
+                <td>
+                    <a href="mailto:{{ volunteer.email }}">{{ volunteer.email }}</a>
+                </td>
+                <td>{{ volunteer.skills|join(', ') }}</td>
+                <td>
+                    {% if enrolment.canDoIt is not null %}
+                        {% if enrolment.canDoIt %}
+                            <span class="label label-success">
+                                Can make it
+                            </span>
+                        {% else %}
+                            <span class="label label-danger">
+                                Can't make it.
+                            </span>
+                        {% endif %}
+                    {% else %}
+                        <span class="label label-default">
+                            No response
+                        </span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if enrolment.canDoIt %}
+                        {% if enrolment.confirmed %}
+                            Confirmed
+                        {% else %}
+                            <a href="" class="btn btn-xs btn-success">Confirm</a>
+                        {% endif %}
+                    {% else %}
+                        <a href="" class="btn btn-xs btn-success disabled">Confirm</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock %}

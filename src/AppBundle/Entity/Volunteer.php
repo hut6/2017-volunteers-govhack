@@ -38,6 +38,13 @@ class Volunteer implements \JsonSerializable
     /**
      * @var string
      *
+     * @ORM\Column(name="phone", type="string", length=255)
+     */
+    private $phone;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
      */
     private $email;
@@ -162,6 +169,22 @@ class Volunteer implements \JsonSerializable
     public function setEnrolments($enrolments)
     {
         $this->enrolments = $enrolments;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string $phone
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
     }
 
 }
