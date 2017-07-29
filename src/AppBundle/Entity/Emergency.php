@@ -203,6 +203,7 @@ class Emergency implements \JsonSerializable
     {
         return [
             'description' => $this->getDescription(),
+            'type' => $this->getEmergencyType(),
             'skills' => $this->getSkills(),
             'created' => $this->getCreated(),
             'lat' => $this->getLat(),

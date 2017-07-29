@@ -4,6 +4,10 @@
     <a class="btn btn-success" href="{{ path('report_new') }}">Add Report</a>
 {% endblock %}
 
+{% block page_title %}
+    Report from the public (showing 24 hours)
+{% endblock page_title %}
+
 {% block page_content %}
 <div style="height: 40vh; overflow: auto">
     <table class="table table-striped">
@@ -28,7 +32,7 @@
                 <td>{{ report.ip }}</td>
                 <td>{{ report.userAgent }}</td>
                 <td>
-                    <a class="btn btn-success btn-xs" href="{{ path('report_edit', { 'id': report.id }) }}">
+                    <a class="btn btn-primary btn-xs" href="{{ path('report_edit', { 'id': report.id }) }}">
                         <i class="fa fa-map-marker"></i>
                         Highlight on map
                     </a>
@@ -47,6 +51,11 @@
 
 </div>
 
+    <style>
+        .right_col {
+            padding-bottom: 0;
+        }
+    </style>
 
 {% endblock %}
 
