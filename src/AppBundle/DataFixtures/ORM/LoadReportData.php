@@ -14,7 +14,7 @@ class LoadReportData extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
 
-        for($x = 0 ; $x < 30 ; $x++) {
+        for($x = 0 ; $x < 15 ; $x++) {
 
             /** @var Report $report */
             $report = new Report();
