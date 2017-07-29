@@ -25,7 +25,6 @@ class Emergency
      * @var \DateTime $created
      *
      * @ORM\Column(type="datetime")
-     * @Gedmo\Timestampable(on="create")
      */
     private $created;
 
@@ -39,10 +38,19 @@ class Emergency
     /**
      * @var Skill[]|Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Skill", mappedBy="emergencies", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Skill", inversedBy="emergencies", cascade={"persist"})
      * @ORM\JoinTable()
      */
     private $skills;
+
+    /**
+     * Volunteer constructor.
+     */
+    public function __construct()
+    {
+        $this->created = new \DateTime();
+    }
+
 
 
     /**
@@ -78,5 +86,38 @@ class Emergency
     {
         return $this->description;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param \DateTime $created
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    }
+
+    /**
+     * @return Skill[]|Collection
+     */
+    public function getSkills()
+    {
+        return $this->skills;
+    }
+
+    /**
+     * @param Skill[]|Collection $skills
+     */
+    public function setSkills($skills)
+    {
+        $this->skills = $skills;
+    }
+
 }
 

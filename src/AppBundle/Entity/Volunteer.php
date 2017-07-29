@@ -24,9 +24,16 @@ class Volunteer
      * @var \DateTime $created
      *
      * @ORM\Column(type="datetime")
-     * @Gedmo\Timestampable(on="create")
      */
     private $created;
+
+    /**
+     * Volunteer constructor.
+     */
+    public function __construct()
+    {
+        $this->created = new \DateTime();
+    }
 
 
     /**
@@ -37,6 +44,22 @@ class Volunteer
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param \DateTime $created
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
     }
 }
 
