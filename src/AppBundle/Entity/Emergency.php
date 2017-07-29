@@ -200,6 +200,8 @@ class Emergency implements \JsonSerializable
             'description' => $this->getDescription(),
             'skills' => $this->getSkills(),
             'created' => $this->getCreated(),
+            'lat' => $this->getLat(),
+            'lon' => $this->getLon(),
         ];
     }
 
