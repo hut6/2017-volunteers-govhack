@@ -64,6 +64,13 @@ class Report implements \JsonSerializable
     private $description;
 
     /**
+     * @var boolean $archive
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $archive = false;
+
+    /**
      * Get id
      *
      * @return int
@@ -182,5 +189,20 @@ class Report implements \JsonSerializable
         ];
     }
 
-}
+    /**
+     * @return bool
+     */
+    public function isArchive()
+    {
+        return $this->archive;
+    }
 
+    /**
+     * @param bool $archive
+     */
+    public function setArchive($archive)
+    {
+        $this->archive = $archive;
+    }
+
+}

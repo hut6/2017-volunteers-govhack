@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  *
  * @Route("report")
  */
-class ReportController extends Controller
+class ReportController extends AppController
 {
     /**
      * Lists all report entities.
@@ -24,7 +24,7 @@ class ReportController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $reports = $em->getRepository('AppBundle:Report')->findAll();
+        $reports = $em->getRepository('AppBundle:Report')->findBy(['archive' => false]);
 
         return $this->render('report/index.html.twig', array(
             'reports' => $reports,
@@ -55,6 +55,21 @@ class ReportController extends Controller
             'report' => $report,
             'form' => $form->createView(),
         ));
+    }
+
+    /**
+     * Displays a form to edit an existing report entity.
+     *
+     * @Route("/{id}/edit", name="report_ignore")
+     * @Method({"GET", "POST"})
+     */
+    public function ignoreAction(Request $request, Report $report)
+    {
+        $report->setArchive(true);
+        $this->em()->flush();
+
+        $this->redirectToRoute("report_index");
+
     }
 
     /**

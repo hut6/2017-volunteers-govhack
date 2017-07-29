@@ -42,6 +42,10 @@
                         <i class="fa fa-map-marker"></i>
                         Highlight on map
                     </a>
+                    <a class="btn btn-danger btn-xs" href="{{ path('report_ignore', { 'id': report.id }) }}">
+                        <i class="fa fa-times-circle"></i>
+                        Ignore
+                    </a>
                     <a class="btn btn-success btn-xs" href="{{ path('report_edit', { 'id': report.id }) }}">
                         <i class="fa fa-pencil"></i>
                         Edit
