@@ -20,7 +20,8 @@ class EmergencyType extends AbstractType
             ->add('skills', EntityType::class, array(
                 'class' => 'AppBundle\Entity\Skill',
                 'multiple'     => true,
-                'expanded' => true
+                'expanded' => true,
+                'label' => "Skills required"
             ))
         ;
     }
