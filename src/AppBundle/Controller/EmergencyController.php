@@ -61,7 +61,7 @@ class EmergencyController extends AppController
 
             $em->flush();
 
-            return $this->redirectToRoute('emergency_index');
+            return $this->redirectToRoute('app_enrolment_list', ["id" => $emergency->getId()]);
         }
 
         return $this->render('emergency/new.html.twig', array(
@@ -85,7 +85,7 @@ class EmergencyController extends AppController
 
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('emergency_index');
+            return $this->redirectToRoute('app_enrolment_list', ["id" => $emergency->getId()]);
         }
 
         return $this->render('emergency/edit.html.twig', array(
