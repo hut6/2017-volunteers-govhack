@@ -6,12 +6,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Emergency
+ * EmergencyType
  *
- * @ORM\Table(name="emergency")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\EmergencyRepository")
+ * @ORM\Table(name="emergency_type")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\SkillRepository")
  */
-class Emergency
+class EmergencyType
 {
     /**
      * @var int
@@ -31,24 +31,17 @@ class Emergency
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
-    private $description;
+    private $name;
 
     /**
-     * @var Skill[]|Collection
+     * @var Emergency[]|Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Skill", inversedBy="emergencies", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Emergency", mappedBy="emergencyType", cascade={"persist"})
      * @ORM\JoinTable()
      */
-    private $skills;
-
-    /**
-     * @var EmergencyType[]|Collection
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Skill", inversedBy="emergencies", cascade={"persist"})
-     */
-    private $emergencyType;
+    private $emergencies;
 
     /**
      * Volunteer constructor.
@@ -58,8 +51,10 @@ class Emergency
         $this->created = new \DateTime();
     }
 
-
-
+    function __toString()
+    {
+        return $this->name;
+    }
     /**
      * Get id
      *
@@ -71,27 +66,25 @@ class Emergency
     }
 
     /**
-     * Set description
+     * Set name
      *
-     * @param string $description
+     * @param string $name
      *
-     * @return Emergency
+     * @return Skill
      */
-    public function setDescription($description)
+    public function setName($name)
     {
-        $this->description = $description;
-
-        return $this;
+        $this->name = $name;
     }
 
     /**
-     * Get description
+     * Get name
      *
      * @return string
      */
-    public function getDescription()
+    public function getName()
     {
-        return $this->description;
+        return $this->name;
     }
 
     /**
@@ -111,19 +104,19 @@ class Emergency
     }
 
     /**
-     * @return Skill[]|Collection
+     * @return Emergency[]|Collection
      */
-    public function getSkills()
+    public function getEmergencies()
     {
-        return $this->skills;
+        return $this->emergencies;
     }
 
     /**
-     * @param Skill[]|Collection $skills
+     * @param Emergency[]|Collection $emergencies
      */
-    public function setSkills($skills)
+    public function setEmergencies($emergencies)
     {
-        $this->skills = $skills;
+        $this->emergencies = $emergencies;
     }
 
 }

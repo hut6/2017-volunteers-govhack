@@ -14,7 +14,7 @@
             <tr>
                 <td>{% if volunteer.created %}{{ volunteer.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
-                    <a class="btn btn-success" href="{{ path('volunteer_edit', { 'id': volunteer.id }) }}">edit</a>
+                    <a class="btn btn-success btn-sm" href="{{ path('volunteer_edit', { 'id': volunteer.id }) }}">edit</a>
                 </td>
             </tr>
         {% endfor %}

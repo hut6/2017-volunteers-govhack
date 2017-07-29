@@ -5,7 +5,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Created</th>
+                <th>Date</th>
                 <th>Description</th>
                 <th>Actions</th>
             </tr>
@@ -16,7 +16,7 @@
                 <td>{% if emergency.created %}{{ emergency.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ emergency.description }}</td>
                 <td>
-                            <a class="btn btn-success" href="{{ path('emergency_edit', { 'id': emergency.id }) }}">edit</a>
+                            <a class="btn btn-success btn-sm" href="{{ path('emergency_edit', { 'id': emergency.id }) }}">edit</a>
                 </td>
             </tr>
         {% endfor %}

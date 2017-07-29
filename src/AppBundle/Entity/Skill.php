@@ -55,8 +55,6 @@ class Skill
     {
         return $this->name;
     }
-
-
     /**
      * Get id
      *

@@ -1,0 +1,12 @@
+{% extends ":emergencytype:_layout.html.twig" %}
+
+{% block page_content %}
+
+    <h1>New</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" class="btn btn-success" value="Add" />
+    {{ form_end(form) }}
+
+{% endblock %}
