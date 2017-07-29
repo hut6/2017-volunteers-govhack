@@ -4,7 +4,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Volunteer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Volunteer controller.
@@ -64,7 +65,6 @@ class VolunteerController extends AppController
      */
     public function editAction(Request $request, Volunteer $volunteer)
     {
-        $deleteForm = $this->createDeleteForm($volunteer);
         $editForm = $this->createForm('AppBundle\Form\VolunteerType', $volunteer);
         $editForm->handleRequest($request);
 
@@ -77,43 +77,7 @@ class VolunteerController extends AppController
         return $this->render('volunteer/edit.html.twig', array(
             'volunteer' => $volunteer,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
-    /**
-     * Deletes a volunteer entity.
-     *
-     * @Route("/{id}", name="volunteer_delete")
-     * @Method("DELETE")
-     */
-    public function deleteAction(Request $request, Volunteer $volunteer)
-    {
-        $form = $this->createDeleteForm($volunteer);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($volunteer);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('volunteer_index');
-    }
-
-    /**
-     * Creates a form to delete a volunteer entity.
-     *
-     * @param Volunteer $volunteer The volunteer entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Volunteer $volunteer)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('volunteer_delete', array('id' => $volunteer->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
 }

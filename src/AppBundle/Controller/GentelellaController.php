@@ -22,7 +22,7 @@ class GentelellaController extends AppController
      * @Route("gentelella/{page}", name="app_gentelella", defaults={"page": "index"})
      *
      * @param Request $request
-     * @param string  $page
+     * @param string $page
      *
      * @return Response
      */
