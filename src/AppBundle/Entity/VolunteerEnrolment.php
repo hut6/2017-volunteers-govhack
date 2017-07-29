@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="volunteer_enrolment")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\VolunteerEnrolmentRepository")
  */
-class VolunteerEnrolment
+class VolunteerEnrolment implements \JsonSerializable
 {
     /**
      * @var int
@@ -20,6 +20,7 @@ class VolunteerEnrolment
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
     /**
      * @var Emergency $emergency
      *
@@ -27,6 +28,7 @@ class VolunteerEnrolment
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $emergency;
+
     /**
      * @var Volunteer $volunteer
      *
@@ -34,6 +36,7 @@ class VolunteerEnrolment
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $volunteer;
+
     /**
      * @var \DateTime $created
      *
@@ -203,6 +206,14 @@ class VolunteerEnrolment
     public function setConfirmedDateTime($confirmedDateTime)
     {
         $this->confirmedDateTime = $confirmedDateTime;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'emergency' => $this->getEmergency(),
+            'volunteer' => $this->getVolunteer(),
+        ];
     }
 
 }
