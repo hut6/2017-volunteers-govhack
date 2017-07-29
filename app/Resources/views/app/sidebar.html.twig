@@ -14,9 +14,11 @@
                 <h3>Menu</h3>
                 <ul class="nav side-menu">
                     <li><a href="{{ path('app_dashboard') }}"><i class="fa fa-home"></i> Dashboard</a></li>
-                    <li><a href="{{ path('emergency_new') }}"><i class="fa fa-fire"></i> New Emergency</a></li>
+                    <li><a href="{{ path('emergency_new') }}"><i class="fa fa-plus"></i> New Emergency</a></li>
                     <li><a href="{{ path('emergency_index') }}"><i class="fa fa-fire"></i> Emergency History</a></li>
                     <li><a href="{{ path('volunteer_index') }}"><i class="fa fa-users"></i> Volunteers</a></li>
+
+                    <li><a href="{{ path('app_gentelella', {'page': 'index'}) }}"><br><i class="fa fa-users"></i> Styleguide</a></li>
                 </ul>
             </div>
             

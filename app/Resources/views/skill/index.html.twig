@@ -1,14 +1,10 @@
-{% extends "app/base.html.twig" %}
+{% extends ":skill:_layout.html.twig" %}
 
 {% block page_content %}
 
-    <h1>Skills list</h1>
-
-    <table>
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Created</th>
                 <th>Name</th>
                 <th>Actions</th>
             </tr>
@@ -16,27 +12,16 @@
         <tbody>
         {% for skill in skills %}
             <tr>
-                <td><a href="{{ path('skill_show', { 'id': skill.id }) }}">{{ skill.id }}</a></td>
-                <td>{% if skill.created %}{{ skill.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ skill.name }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('skill_show', { 'id': skill.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('skill_edit', { 'id': skill.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                            <a class="btn btn-success" href="{{ path('skill_edit', { 'id': skill.id }) }}">edit</a>
+
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('skill_new') }}">Create a new skill</a>
-        </li>
-    </ul>
+    <a class="btn btn-success" href="{{ path('skill_new') }}">Add skill</a>
+
 {% endblock %}

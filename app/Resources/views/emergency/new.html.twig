@@ -1,17 +1,12 @@
-{% extends "app/base.html.twig" %}
+{% extends ":emergency:_layout.html.twig" %}
 
 {% block page_content %}
 
-    <h1>Emergency creation</h1>
+    <h1>New</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+        <input type="submit" class="btn btn-success" value="Add &amp; Notify Volunteers" />
     {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('emergency_index') }}">Back to the list</a>
-        </li>
-    </ul>
 {% endblock %}

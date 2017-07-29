@@ -48,28 +48,12 @@ class VolunteerController extends Controller
             $em->persist($volunteer);
             $em->flush();
 
-            return $this->redirectToRoute('volunteer_show', array('id' => $volunteer->getId()));
+            return $this->redirectToRoute('volunteer_index');
         }
 
         return $this->render('volunteer/new.html.twig', array(
             'volunteer' => $volunteer,
             'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Finds and displays a volunteer entity.
-     *
-     * @Route("/{id}", name="volunteer_show")
-     * @Method("GET")
-     */
-    public function showAction(Volunteer $volunteer)
-    {
-        $deleteForm = $this->createDeleteForm($volunteer);
-
-        return $this->render('volunteer/show.html.twig', array(
-            'volunteer' => $volunteer,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -88,7 +72,7 @@ class VolunteerController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('volunteer_edit', array('id' => $volunteer->getId()));
+            return $this->redirectToRoute('volunteer_index');
         }
 
         return $this->render('volunteer/edit.html.twig', array(

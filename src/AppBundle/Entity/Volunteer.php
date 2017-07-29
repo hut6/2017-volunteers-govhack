@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,13 +29,34 @@ class Volunteer
     private $created;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255, unique=true)
+     */
+    private $email;
+
+    /**
+     * @var Skill[]|Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Skill", inversedBy="emergencies", cascade={"persist"})
+     * @ORM\JoinTable()
+     */
+    private $skills;
+
+    /**
      * Volunteer constructor.
      */
     public function __construct()
     {
         $this->created = new \DateTime();
     }
-
 
     /**
      * Get id
@@ -61,5 +83,55 @@ class Volunteer
     {
         $this->created = $created;
     }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return Skill[]|Collection
+     */
+    public function getSkills()
+    {
+        return $this->skills;
+    }
+
+    /**
+     * @param Skill[]|Collection $skills
+     */
+    public function setSkills($skills)
+    {
+        $this->skills = $skills;
+    }
+
+
 }
 

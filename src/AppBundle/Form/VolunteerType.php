@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,7 +14,14 @@ class VolunteerType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('created');
+        $builder
+            ->add('name')
+            ->add('email')
+            ->add('skills', EntityType::class, array(
+                'class' => 'AppBundle\Entity\Skill',
+                'multiple'     => true,
+                'expanded' => true
+            ));
     }
     
     /**

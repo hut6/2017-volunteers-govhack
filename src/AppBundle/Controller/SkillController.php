@@ -56,23 +56,6 @@ class SkillController extends Controller
             'form' => $form->createView(),
         ));
     }
-
-    /**
-     * Finds and displays a skill entity.
-     *
-     * @Route("/{id}", name="skill_show")
-     * @Method("GET")
-     */
-    public function showAction(Skill $skill)
-    {
-        $deleteForm = $this->createDeleteForm($skill);
-
-        return $this->render('skill/show.html.twig', array(
-            'skill' => $skill,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
     /**
      * Displays a form to edit an existing skill entity.
      *
@@ -88,7 +71,7 @@ class SkillController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('skill_edit', array('id' => $skill->getId()));
+            return $this->redirectToRoute('skill_index');
         }
 
         return $this->render('skill/edit.html.twig', array(

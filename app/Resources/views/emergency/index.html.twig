@@ -1,13 +1,10 @@
-{% extends "app/base.html.twig" %}
+{% extends ":emergency:_layout.html.twig" %}
 
 {% block page_content %}
 
-    <h1>Emergencies list</h1>
-
-    <table>
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Created</th>
                 <th>Description</th>
                 <th>Actions</th>
@@ -16,27 +13,14 @@
         <tbody>
         {% for emergency in emergencies %}
             <tr>
-                <td><a href="{{ path('emergency_show', { 'id': emergency.id }) }}">{{ emergency.id }}</a></td>
                 <td>{% if emergency.created %}{{ emergency.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ emergency.description }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('emergency_show', { 'id': emergency.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('emergency_edit', { 'id': emergency.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                            <a class="btn btn-success" href="{{ path('emergency_edit', { 'id': emergency.id }) }}">edit</a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('emergency_new') }}">Create a new emergency</a>
-        </li>
-    </ul>
 {% endblock %}

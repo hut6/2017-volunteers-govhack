@@ -51,6 +51,11 @@ class Skill
         $this->created = new \DateTime();
     }
 
+    function __toString()
+    {
+        return $this->name;
+    }
+
 
     /**
      * Get id
