@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Emergency;
+
 /**
  * VolunteerEnrolmentRepository
  *
@@ -10,4 +12,34 @@ namespace AppBundle\Repository;
  */
 class VolunteerEnrolmentRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getEnrolledVolunteers(Emergency $emergency,  $skillId = null)
+    {
+
+        $builder = $this->createQueryBuilder("enrol")
+            ->join("enrol.volunteer", 'vol')
+            ->join("vol.skills", 'skills')
+            ->where("enrol.emergency = :emergency")->setParameter('emergency', $emergency);
+
+        if($skillId) {
+            $builder = $builder->andWhere("skills.id = :skill")->setParameter('skill', $skillId);
+        }
+
+        $results = $builder
+            ->getQuery()
+            ->getResult();
+
+        return $results;
+    }
+
+    public function getUnconfirmedVolunteers(Emergency $emergency)
+    {
+
+        return $this->createQueryBuilder("enrol")
+            ->where("enrol.emergency = :emergency")
+            ->setParameter('emergency', $emergency)
+            ->andWhere("enrol.confirmed IS NULL")
+            ->getQuery()
+            ->getResult();
+    }
+
 }

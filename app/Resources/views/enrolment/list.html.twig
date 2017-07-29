@@ -2,6 +2,35 @@
 
 {% block page_content %}
 
+    <p>
+        <strong>Date Logged:</strong><br>
+        {{ emergency.created|localizeddate('medium', 'short') }}
+    </p>
+    <p>
+        <strong>Emergency Type:</strong><br>
+        {{ emergency.emergencyType }}
+    </p>
+    <p>
+        <strong>Description:</strong><br>
+        {{ emergency.description }}
+    </p>
+
+    <p>
+        <strong>Skills required:</strong>
+    </p>
+
+    <p>
+        {% for skill in emergency.skills %}
+            <span class="label label-default">
+                {{ skill }}
+            </span> &nbsp;
+        {% endfor %}
+    </p>
+
+    <br>
+
+    <h2>Volunteers that have been notified: </h2>
+
     <table class="table table-striped">
         <thead>
         <tr>
@@ -10,14 +39,18 @@
             <th>Phone</th>
             <th>Email</th>
             <th>Skills</th>
-            <th>Responded</th>
-            <th>Confirmed</th>
+            <th>Can Attend</th>
+            <th>Confirm Attendance</th>
         </tr>
         </thead>
         <tbody>
         {% for enrolment in emergency.enrolments %}
             {% set volunteer = enrolment.volunteer %}
-            <tr>
+            <tr style="background:
+        {% if enrolment.canDoIt is not null %}
+            {{ enrolment.canDoIt ? "#cdf9cd" : "#f6dedd" }}
+        {% endif %}"
+            >
                 <td>{% if enrolment.created %}{{ enrolment.created|localizeddate('medium', 'medium') }}{% endif %}</td>
                 <td>{{ volunteer.name }}</td>
                 <td>
@@ -45,19 +78,58 @@
                     {% endif %}
                 </td>
                 <td>
-                    {% if enrolment.canDoIt %}
-                        {% if enrolment.confirmed %}
-                            Confirmed
+                    {% if enrolment.confirmed is null or enrolment.confirmed %}
+                        {% if enrolment.canDoIt %}
+                            {% if enrolment.confirmed %}
+                                <span class="label label-success">
+                                    Confirmed
+                                </span>
+                            {% else %}
+                                <a href="{{ path('app_enrolment_confirm', { 'id': enrolment.id }) }}"
+                                   class="btn btn-xs btn-success">
+                                    Confirm
+                                </a>
+                            {% endif %}
                         {% else %}
-                            <a href="{{ path('app_enrolment_confirm', { 'id': enrolment.id }) }}" class="btn btn-xs btn-success">Confirm</a>
+                            <a href="" class="btn btn-xs btn-success disabled">
+                                Confirm
+                            </a>
+                        {% endif %}
+                        {% if not enrolment.confirmed %}
+                            <a href="{{ path('app_enrolment_cancel', { 'id': enrolment.id }) }}" class="btn btn-xs btn-danger">
+                                Cancel
+                            </a>
                         {% endif %}
                     {% else %}
-                        <a href="" class="btn btn-xs btn-success disabled">Confirm</a>
+                        <span class="label label-danger">
+                            Cancelled
+                        </span>
                     {% endif %}
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+
+    <h2>
+        Cancel enrolments for:
+    </h2>
+
+    <p>
+        <a href="{{ path('app_enrolment_cancelall', {'id': emergency.id}) }}" class="btn btn-danger btn-xs">
+            <span style="opacity: .5">
+                Cancel:
+            </span>
+            Unconfirmed
+        </a>
+        {% for skill in emergency.skills %}
+            <a href="{{ path('app_enrolment_cancelskill', {'id': emergency.id}) }}?skill={{ skill.id }}" class="btn btn-danger btn-xs">
+                <span style="opacity: .5">
+                    Cancel:
+                </span>
+                {{ skill }}
+            </a>
+        {% endfor %}
+    </p>
 
 {% endblock %}

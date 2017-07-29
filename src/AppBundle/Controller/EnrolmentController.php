@@ -6,6 +6,7 @@ use AppBundle\Entity\Emergency;
 use AppBundle\Entity\VolunteerEnrolment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class EnrolmentController extends AppController
 {
@@ -42,6 +43,64 @@ class EnrolmentController extends AppController
 
         return $this->redirectToRoute('app_enrolment_list', [
             "id" => $enrolment->getEmergency()->getId(),
+        ]);
+
+    }
+
+    /**
+     * @Route("/cancel-enrolment/{id}")
+     */
+    public function cancelAction(VolunteerEnrolment $enrolment)
+    {
+        $enrolment->setConfirmed(0);
+
+        $this->em()->flush();
+
+        return $this->redirectToRoute('app_enrolment_list', [
+            "id" => $enrolment->getEmergency()->getId(),
+        ]);
+
+    }
+
+    /**
+     * @Route("/cancel-all/{id}")
+     */
+    public function cancelAllAction(Emergency $emergency)
+    {
+
+        $enrolments = $this->em()->getRepository("AppBundle:VolunteerEnrolment")->getUnconfirmedVolunteers($emergency);
+
+        foreach ($enrolments as $enrolment) {
+            $enrolment->setConfirmed(false);
+        }
+
+        $this->em()->flush();
+
+        return $this->redirectToRoute('app_enrolment_list', [
+            "id" => $emergency->getId(),
+        ]);
+
+    }
+
+    /**
+     * @Route("/cancel-skill-enrolments/{id}")
+     */
+    public function cancelSkillAction(Emergency $emergency, Request $request)
+    {
+
+        $enrolments = $this->em()->getRepository("AppBundle:VolunteerEnrolment")->getEnrolledVolunteers(
+            $emergency,
+            $request->get("skill")
+        );
+
+        foreach ($enrolments as $enrolment) {
+            $enrolment->setConfirmed(false);
+        }
+
+        $this->em()->flush();
+
+        return $this->redirectToRoute('app_enrolment_list', [
+            "id" => $emergency->getId(),
         ]);
 
     }
