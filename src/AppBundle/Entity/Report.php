@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="report")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ReportRepository")
  */
-class Report
+class Report implements \JsonSerializable
 {
     /**
      * @var int
