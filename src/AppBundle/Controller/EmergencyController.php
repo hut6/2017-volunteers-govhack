@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Emergency;
+use AppBundle\Entity\VolunteerEnrolment;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
 
@@ -46,13 +47,15 @@ class EmergencyController extends AppController
             $em = $this->getDoctrine()->getManager();
             $em->persist($emergency);
 
-            $volunteers = $em->getRepository("AppBundle:Volunteer")->findBy([
-                "skills" => $emergency->getSkills()
-            ]);
+            $volunteers = $em->getRepository("AppBundle:Volunteer")->findBySkills($emergency->getSkills());
 
-            var_dump($volunteers);
-            die;
-//            foreach ()
+            foreach ($volunteers as $volunteer) {
+                $enrolment = new VolunteerEnrolment(
+                    $emergency,
+                    $volunteer
+                );
+                $em->persist($enrolment);
+            }
 
             $em->flush();
 

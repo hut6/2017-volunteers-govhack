@@ -14,7 +14,9 @@
             <tr>
                 <td>{{ emergencyType.name }}</td>
                 <td>
-                    <a class="btn btn-success btn-sm" href="{{ path('emergencytype_edit', { 'id': emergencyType.id }) }}">edit</a>
+                    <a class="btn btn-success btn-xs" href="{{ path('emergencytype_edit', { 'id': emergencyType.id }) }}">
+                        <i class="fa fa-pencil"></i>
+                        edit</a>
                 </td>
             </tr>
         {% endfor %}

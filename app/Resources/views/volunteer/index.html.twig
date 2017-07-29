@@ -20,7 +20,10 @@
                 <td>{{ volunteer.email }}</td>
                 <td>{{ volunteer.skills|join(', ') }}</td>
                 <td>
-                    <a class="btn btn-success btn-sm" href="{{ path('volunteer_edit', { 'id': volunteer.id }) }}">edit</a>
+                    <a class="btn btn-success btn-xs" href="{{ path('volunteer_edit', { 'id': volunteer.id }) }}">
+                        <i class="fa fa-pencil"></i>
+                        edit
+                    </a>
                 </td>
             </tr>
         {% endfor %}

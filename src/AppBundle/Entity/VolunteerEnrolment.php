@@ -43,9 +43,13 @@ class VolunteerEnrolment
 
     /**
      * VolunteerEnrolment constructor.
+     * @param Emergency $emergency
+     * @param Volunteer $volunteer
      */
-    public function __construct()
+    public function __construct(Emergency $emergency, Volunteer $volunteer)
     {
+        $this->emergency = $emergency;
+        $this->volunteer = $volunteer;
         $this->created = new \DateTime();
     }
 
