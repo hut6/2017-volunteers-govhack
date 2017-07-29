@@ -5,7 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Emergency;
 use AppBundle\Entity\VolunteerEnrolment;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Emergency controller.
