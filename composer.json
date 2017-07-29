@@ -47,7 +47,8 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "phing/phing": "^2.0",
         "stof/doctrine-extensions-bundle": "^1.2",
-        "doctrine/doctrine-migrations-bundle": "^1.0"
+        "doctrine/doctrine-migrations-bundle": "^1.0",
+        "twig/extensions" : "~1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

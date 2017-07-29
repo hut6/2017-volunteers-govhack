@@ -51,6 +51,8 @@ class EmergencyController extends Controller
                 "skills" => $emergency->getSkills()
             ]);
 
+            var_dump($volunteers);
+            die;
 //            foreach ()
 
             $em->flush();

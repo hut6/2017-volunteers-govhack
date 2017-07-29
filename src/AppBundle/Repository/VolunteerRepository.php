@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Repository;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * VolunteerRepository
@@ -10,4 +11,8 @@ namespace AppBundle\Repository;
  */
 class VolunteerRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findBySkills(Collection $kills)
+    {
+
+    }
 }

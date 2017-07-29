@@ -5,14 +5,20 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Date</th>
+                <th>Date joined</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Skills</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for volunteer in volunteers %}
             <tr>
-                <td>{% if volunteer.created %}{{ volunteer.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if volunteer.created %}{{ volunteer.created|localizeddate('medium', 'none') }}{% endif %}</td>
+                <td>{{ volunteer.name }}</td>
+                <td>{{ volunteer.email }}</td>
+                <td>{{ volunteer.skills|join(', ') }}</td>
                 <td>
                     <a class="btn btn-success btn-sm" href="{{ path('volunteer_edit', { 'id': volunteer.id }) }}">edit</a>
                 </td>
