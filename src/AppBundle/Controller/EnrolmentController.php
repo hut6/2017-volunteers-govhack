@@ -36,7 +36,14 @@ class EnrolmentController extends AppController
      */
     public function confirmAction(VolunteerEnrolment $enrolment)
     {
-        $enrolment->setConfirmed(true);
+        $enrolment->setConfirmed(1);
+
+        $this->em()->flush();
+
+        return $this->redirectToRoute('app_enrolment_list', [
+            "id" => $enrolment->getEmergency()->getId(),
+        ]);
+
     }
 
 }

@@ -186,6 +186,7 @@ class VolunteerEnrolment
     public function setConfirmed($confirmed)
     {
         $this->confirmed = $confirmed;
+        $this->confirmedDateTime = new \DateTime();
     }
 
     /**

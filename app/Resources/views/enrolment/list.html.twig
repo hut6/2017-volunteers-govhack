@@ -49,7 +49,7 @@
                         {% if enrolment.confirmed %}
                             Confirmed
                         {% else %}
-                            <a href="" class="btn btn-xs btn-success">Confirm</a>
+                            <a href="{{ path('app_enrolment_confirm', { 'id': enrolment.id }) }}" class="btn btn-xs btn-success">Confirm</a>
                         {% endif %}
                     {% else %}
                         <a href="" class="btn btn-xs btn-success disabled">Confirm</a>
