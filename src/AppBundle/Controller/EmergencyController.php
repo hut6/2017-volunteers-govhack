@@ -44,6 +44,7 @@ class EmergencyController extends AppController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($emergency);
 
@@ -80,9 +81,10 @@ class EmergencyController extends AppController
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('emergency_edit', array('id' => $emergency->getId()));
+            return $this->redirectToRoute('emergency_index');
         }
 
         return $this->render('emergency/edit.html.twig', array(
