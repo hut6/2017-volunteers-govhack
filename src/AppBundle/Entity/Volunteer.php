@@ -134,7 +134,11 @@ class Volunteer implements \JsonSerializable
 
     public function jsonSerialize()
     {
-        return [];
+        return [
+            'name' => $this->getName(),
+            'email' => $this->getEmail(),
+            'skills' => $this->getSkills(),
+        ];
     }
 }
 

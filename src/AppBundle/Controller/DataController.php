@@ -6,6 +6,7 @@ use AppBundle\Entity\Emergency;
 use AppBundle\Entity\Volunteer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * @Route("/api/v1")
@@ -13,8 +14,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class DataController extends AppController
 {
     /**
-     * @Route("/", name="api_volunteer_list")
+     * @Route("/volunteer", name="api_volunteer_list")
      * @Method("GET")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function listVolunteerAction()
     {
@@ -23,7 +25,7 @@ class DataController extends AppController
     }
 
     /**
-     * @Route("/", name="api_emergency_list")
+     * @Route("/emergencies", name="api_emergency_list")
      * @Method("GET")
      */
     public function listEmergencyAction()

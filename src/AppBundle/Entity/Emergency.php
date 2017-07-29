@@ -21,6 +21,7 @@ class Emergency implements \JsonSerializable
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
     /**
      * @var \DateTime $created
      *
@@ -128,7 +129,11 @@ class Emergency implements \JsonSerializable
 
     public function jsonSerialize()
     {
-        return [];
+        return [
+            'description' => $this->getDescription(),
+            'skills' => $this->getSkills(),
+            'created' => $this->getCreated(),
+        ];
     }
 
 }

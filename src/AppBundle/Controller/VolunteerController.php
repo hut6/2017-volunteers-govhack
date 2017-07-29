@@ -23,7 +23,7 @@ class VolunteerController extends AppController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $volunteers = $em->getRepository('AppBundle:Volunteer')->findAll();
+        $volunteers = $em->getRepository(Volunteer::class)->findAll();
 
         return $this->render('volunteer/index.html.twig', array(
             'volunteers' => $volunteers,

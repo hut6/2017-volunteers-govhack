@@ -24,7 +24,7 @@ class EmergencyTypeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $emergencyTypes = $em->getRepository('AppBundle:EmergencyType')->findAll();
+        $emergencyTypes = $em->getRepository(EmergencyType::class)->findAll();
 
         return $this->render('emergencytype/index.html.twig', array(
             'emergencyTypes' => $emergencyTypes,

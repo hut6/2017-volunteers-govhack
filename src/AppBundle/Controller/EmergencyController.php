@@ -23,7 +23,7 @@ class EmergencyController extends AppController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $emergencies = $em->getRepository('AppBundle:Emergency')->findAll();
+        $emergencies = $em->getRepository(Emergency::class)->findAll();
 
         return $this->render('emergency/index.html.twig', array(
             'emergencies' => $emergencies,

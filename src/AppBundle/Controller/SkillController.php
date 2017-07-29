@@ -23,7 +23,7 @@ class SkillController extends AppController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $skills = $em->getRepository('AppBundle:Skill')->findAll();
+        $skills = $em->getRepository(Skill::class)->findAll();
 
         return $this->render('skill/index.html.twig', array(
             'skills' => $skills,

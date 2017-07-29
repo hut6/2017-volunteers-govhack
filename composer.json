@@ -67,6 +67,10 @@
         "setup": [
             "php ./vendor/bin/phing setup"
         ],
+        "db:clean": [
+            "bin/console doctrine:database:drop --force --if-exists",
+            "bin/console doctrine:database:create"
+        ],
         "build:dev": [
             "bin/console doctrine:database:drop --force --if-exists",
             "bin/console doctrine:database:create",
