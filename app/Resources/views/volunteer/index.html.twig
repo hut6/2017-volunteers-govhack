@@ -1,0 +1,40 @@
+{% extends "app/base.html.twig" %}
+
+{% block page_content %}
+
+    <h1>Volunteers list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Created</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for volunteer in volunteers %}
+            <tr>
+                <td><a href="{{ path('volunteer_show', { 'id': volunteer.id }) }}">{{ volunteer.id }}</a></td>
+                <td>{% if volunteer.created %}{{ volunteer.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('volunteer_show', { 'id': volunteer.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('volunteer_edit', { 'id': volunteer.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('volunteer_new') }}">Create a new volunteer</a>
+        </li>
+    </ul>
+{% endblock %}
