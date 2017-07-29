@@ -47,7 +47,7 @@ class Emergency implements \JsonSerializable
     private $skills;
 
     /**
-     * @var EmergencyType[]|Collection
+     * @var EmergencyType
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\EmergencyType", inversedBy="emergencies", cascade={"persist"})
      */
@@ -149,7 +149,7 @@ class Emergency implements \JsonSerializable
     }
 
     /**
-     * @return EmergencyType[]|Collection
+     * @return EmergencyType
      */
     public function getEmergencyType()
     {
@@ -203,7 +203,7 @@ class Emergency implements \JsonSerializable
     {
         return [
             'description' => $this->getDescription(),
-            'type' => $this->getEmergencyType(),
+            'type' => $this->getEmergencyType()->getName(),
             'skills' => $this->getSkills(),
             'created' => $this->getCreated(),
             'lat' => $this->getLat(),
