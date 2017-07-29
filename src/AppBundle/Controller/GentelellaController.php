@@ -53,6 +53,6 @@ class GentelellaController extends AppController
      */
     public function homepageAction(Request $request)
     {
-        return $this->render('app/pages/dashboard.html.twig', []);
+        return $this->redirectToRoute("emergency_index");
     }
 }
