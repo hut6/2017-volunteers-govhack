@@ -59,7 +59,13 @@
                 <td>
                     <a href="mailto:{{ volunteer.email }}">{{ volunteer.email }}</a>
                 </td>
-                <td>{{ volunteer.skills|join(', ') }}</td>
+                <td>
+                    {% set skills = [] %}
+                    {% for skill in volunteer.skills if emergency.skills.contains(skill) %}
+                        {% set skills = skills|merge([skill.name]) %}
+                    {% endfor %}
+                    {{ skills|join(', ') }}
+                </td>
                 <td>
                     {% if enrolment.canDoIt is not null %}
                         {% if enrolment.canDoIt %}

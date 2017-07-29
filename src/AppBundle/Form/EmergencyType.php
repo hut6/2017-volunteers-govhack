@@ -19,6 +19,8 @@ class EmergencyType extends AbstractType
         $builder
             ->add('description')
             ->add('emergencyType')
+            ->add('lat')
+            ->add('lon')
             ->add('skills', EntityType::class, array(
                 'class' => 'AppBundle\Entity\Skill',
                 'multiple'     => true,
