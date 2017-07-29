@@ -3,17 +3,20 @@
 
     <div class="nav_menu">
         <nav class="">
-            <ul class="nav navbar-nav navbar-left" style="background: rgba(255, 0,0,0.1)">
+            <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+            <ul class="nav navbar-nav navbar-left" style="background: rgba(255, 0,0,0.1); float:left; margin: 0; ">
                 <li><a href="{{ path('emergency_new') }}"><i class="fa fa-plus"></i> &nbsp;&nbsp;New Emergency</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" style="width: auto; float:right;">
                 <li class="">
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         {{ app.user.username }}
                         <span class=" fa fa-angle-down"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right">
-                        <li><a href="{{ path('app_profile')}}"> Profile</a></li>
+                        <li><a href="{{ path('app_profile')}}"> User Account</a></li>
                         <li>
                             <a href="{{ path('skill_index') }}">
                                 <span>Skill Settings</span>

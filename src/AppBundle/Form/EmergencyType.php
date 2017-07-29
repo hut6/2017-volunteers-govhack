@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use Oh\GoogleMapFormTypeBundle\Form\Type\GoogleMapType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;

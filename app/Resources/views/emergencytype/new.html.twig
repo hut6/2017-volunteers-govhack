@@ -1,8 +1,10 @@
 {% extends ":emergencytype:_layout.html.twig" %}
 
-{% block page_content %}
+{% block page_title %}
+    New Emergency Type
+{% endblock page_title %}
 
-    <h1>New</h1>
+{% block page_content %}
 
     {{ form_start(form) }}
         {{ form_widget(form) }}

@@ -4,6 +4,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Oh\GoogleMapFormTypeBundle\Validator\Constraints as OhAssert;
 
 /**
  * Emergency
@@ -194,6 +196,9 @@ class Emergency implements \JsonSerializable
         $this->lon = $lon;
     }
 
+    /**
+     * @return array
+     */
     public function jsonSerialize()
     {
         return [
@@ -217,6 +222,24 @@ class Emergency implements \JsonSerializable
     public function setEnrolments($enrolments)
     {
         $this->enrolments = $enrolments;
+    }
+
+    /**
+     * @param $latlng
+     * @return $this
+     */
+    public function setLatLng($latlng)
+    {
+        $this->setLat($latlng['lat']);
+        $this->setLon($latlng['lon']);
+    }
+
+    /**
+     * @return array
+     */
+    public function getLatLng()
+    {
+        return array('lat'=>$this->getLat(),'lng'=>$this->getLon());
     }
 
 }

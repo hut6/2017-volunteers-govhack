@@ -1,5 +1,9 @@
 {% extends ":volunteer:_layout.html.twig" %}
 
+{% block page_button %}
+    <a class="btn btn-success" href="{{ path('volunteer_new') }}">Add volunteer</a>
+{% endblock %}
+
 {% block page_content %}
 
     <table class="table table-striped">
@@ -38,6 +42,5 @@
         </tbody>
     </table>
 
-            <a class="btn btn-success" href="{{ path('volunteer_new') }}">Add volunteer</a>
 
 {% endblock %}

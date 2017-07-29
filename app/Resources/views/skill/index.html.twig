@@ -1,5 +1,9 @@
 {% extends ":skill:_layout.html.twig" %}
 
+{% block page_button %}
+    <a class="btn btn-success" href="{{ path('skill_new') }}">Add skill</a>
+{% endblock %}
+
 {% block page_content %}
 
     <table class="table table-striped">
@@ -23,7 +27,5 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a class="btn btn-success" href="{{ path('skill_new') }}">Add skill</a>
 
 {% endblock %}
