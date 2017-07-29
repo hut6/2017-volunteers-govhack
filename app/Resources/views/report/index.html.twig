@@ -1,0 +1,77 @@
+{% extends ":report:_layout.html.twig" %}
+
+{% block page_button %}
+    <a class="btn btn-success" href="{{ path('report_new') }}">Add Report</a>
+{% endblock %}
+
+{% block page_content %}
+<div style="height: 40vh; overflow: auto">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date / Time Reported</th>
+                <th>Description</th>
+                <th>Lat</th>
+                <th>Lng</th>
+                <th>Ip</th>
+                <th>User Agent</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for report in reports %}
+            <tr>
+                <td>{% if report.created %}{{ report.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ report.description }}</td>
+                <td>{{ report.lat }}</td>
+                <td>{{ report.lng }}</td>
+                <td>{{ report.ip }}</td>
+                <td>{{ report.userAgent }}</td>
+                <td>
+                    <a class="btn btn-success btn-xs" href="{{ path('report_edit', { 'id': report.id }) }}">
+                        <i class="fa fa-map-marker"></i>
+                        Highlight on map
+                    </a>
+                    <a class="btn btn-success btn-xs" href="{{ path('report_edit', { 'id': report.id }) }}">
+                        <i class="fa fa-pencil"></i>
+                        Edit
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="ga" id="map" style="margin-left: -10px; margin-right: -10px; height: 50vh;">
+
+</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+{{ parent() }}
+
+<script>
+    function initMap() {
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 10,
+            scrollwheel: false,
+            center: {lat: -23.69, lng: 133.88}
+        });
+
+        var marker = new google.maps.Marker({
+            position: {lat: -23.69, lng: 133.88},
+            map: map
+        });
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrAEBmbgLfeIqyCdvG7_cawiwD-B-1abw&callback=initMap">
+</script>
+
+
+{% endblock %}

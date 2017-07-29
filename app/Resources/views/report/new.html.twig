@@ -1,14 +1,14 @@
-{% extends ":emergency:_layout.html.twig" %}
+{% extends ":report:_layout.html.twig" %}
 
 {% block page_title %}
-    New Mobilization
+    Add Emergency
 {% endblock page_title %}
 
 {% block page_content %}
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" class="btn btn-success" value="Notify Matching Volunteers &amp; Continue" />
+        <input type="submit" class="btn btn-success" value="Add" />
     {{ form_end(form) }}
 
 {% endblock %}
