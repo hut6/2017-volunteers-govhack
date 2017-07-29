@@ -34,7 +34,7 @@
                 <td>{{ report.ip }}</td>
                 <td>{{ report.userAgent }}</td>
                 <td>
-                    <a class="btn btn-primary btn-xs" data-marker="{{ loop.index }}" href="">
+                    <a class="btn btn-primary btn-xs panTo" data-marker="{{ loop.index }}" href="">
                         <i class="fa fa-map-marker"></i>
                         Highlight on map
                     </a>
@@ -114,6 +114,13 @@
         map.fitBounds(bounds);
 
     }
+
+    $('.panTo').click(function(){
+        id = $(this).data('marker');
+        map.setZoom(13);
+        map.panTo(markers[id].position);
+        return false;
+    });
 </script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrAEBmbgLfeIqyCdvG7_cawiwD-B-1abw&callback=initMap">

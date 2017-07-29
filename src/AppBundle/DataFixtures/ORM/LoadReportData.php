@@ -20,15 +20,14 @@ class LoadReportData extends AbstractFixture implements OrderedFixtureInterface
             $report = new Report();
 
             $report->setCreated(new \DateTime());
-            $report->setLat(-23.69 * rand(9980, 10020) / 10000);
-            $report->setLng(133.88 * rand(9980, 10020) / 10000);
+            $report->setLat(-23.69 * rand(9970, 10070) / 10000);
+            $report->setLng(133.88 * rand(9985, 10015) / 10000);
 
             $manager->persist($report);
         }
 
         $manager->flush();
     }
-
 
     public function getOrder()
     {
