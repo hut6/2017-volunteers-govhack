@@ -68,7 +68,7 @@ class ReportController extends AppController
         $report->setArchive(true);
         $this->em()->flush();
 
-        $this->redirectToRoute("report_index");
+        return $this->redirectToRoute("report_index");
 
     }
 
