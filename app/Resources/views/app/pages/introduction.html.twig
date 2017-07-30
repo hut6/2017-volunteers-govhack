@@ -1,5 +1,253 @@
 {% extends "@FOSUser/layout.html.twig" %}
 
 {% block fos_user_content %}
-aaaaa
+
+    <style>
+
+        body {
+
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .responsive-embed.widescreen, .flex-video.widescreen {
+            padding-bottom: 56.25%;
+        }
+
+        .responsive-embed {
+            margin-bottom: 0;
+        }
+
+        .responsive-embed, .flex-video {
+            position: relative;
+            height: 0;
+            margin-bottom: 1rem;
+            padding-bottom: 75%;
+            overflow: hidden;
+        }
+
+        .responsive-embed iframe, .responsive-embed object, .responsive-embed embed, .responsive-embed video, .flex-video iframe, .flex-video object, .flex-video embed, .flex-video video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        hr {
+            margin: 2em 0;
+            opacity: .2;
+        }
+
+    </style>
+
+    <div style="max-width: 600px; margin: 0 auto; text-align: center">
+
+        <br>
+        <h1>
+            <i class="fa fa-paper-plane-o"></i>
+            Mobilize
+        </h1>
+        <br>
+
+        <div style="text-align: left; color: #eee;">
+
+            <p>
+                TL;DR - The goal of the app is to get people to report fires more often and to streamline
+                and coordinate communications between professional staff, various stakeholders and volunteers.
+            </p>
+
+            <hr>
+
+            <h2>
+                The video
+            </h2>
+
+            <div class="responsive-embed widescreen">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/VwkRy1nmSp4" frameborder="0"
+                        allowfullscreen></iframe>
+            </div>
+
+            <hr>
+
+            <h2>
+                What problems are we trying to resolve?
+            </h2>
+
+            <ol>
+                <li>
+                    <p>
+                        The main issue when it comes to reporting a fire is that fires or incidents are for various
+                        reasons not reported in time to officials. All too often, people assume that a fire or a
+                        sighting of smoke has already been reported by someone else, and therefore don’t call triple 0.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Furthermore, traditionally, to report a fire or an issue, people have to call “000” and speak to
+                        an operator on the phone. People are often reluctant to do that, i.e. because of perceived
+                        prejudice, or they don’t want to become involved or linked to a reported fire.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Finally, in the Northern Territory, fire services communicates with paid staff and volunteers
+                        via phone calls or sms messages when there are incidents. This system is time consuming and
+                        bears certain planning inconveniences. Often, it’s hard to know who’s available, who’s coming,
+                        etc…
+                    </p>
+                </li>
+            </ol>
+
+            <hr>
+
+            <h2>The Solutions?</h2>
+
+            <ol>
+                <li>
+                    <p>
+                        The aim is to make it easier for people to recognize whether a fire has already been reported or
+                        not, so they can then decide to call triple 0 to report the fire, which is the current
+                        recommended way to report fires.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Members of the public should be able to send a report of a fire either by simply
+                        submitting a photo via the app to the NT’s operations centre, which will also include the
+                        timestamp of when the image was taken, and for easy location the GPS coordinates where the
+                        picture was taken.
+                    </p>
+                    <p>
+                        At this point in time, only triple 0 calls are accepted by officials to report a fire, but
+                        submitting reports via an app might be recognized in the future.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        A notification system can notify paid staff, volunteers and other people (e.g. the media) about
+                        incidents with a single push message. It has the capability to notify only relevant
+                        staff/volunteers based on the type of incident and the roles or skills required.
+                    </p>
+                    <p>
+                        In addition, the application can also be used to ask volunteers for example to investigate
+                        unsubstantiated reports of fires made via the app, to ensure that the report wasn’t a hoax.
+                    </p>
+                </li>
+            </ol>
+
+            <hr>
+
+            <h2>Data</h2>
+
+            <ul>
+                <li>
+                    <p>
+                        NT PFES Incident Data (not in the list of the Hackerspace dataset list as far as we can see).
+                        <br>
+                        <a href="http://www.pfes.nt.gov.au/incidentmap/json/ntfrsincidents.json">
+                            http://www.pfes.nt.gov.au/incidentmap/json/ntfrsincidents.json
+                        </a>
+                    </p>
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2>Technologies</h2>
+
+            <ul>
+                <li>
+                    <p>
+                        For the <strong>web app</strong>, we used Symfony; a framework which uses PHP and MySQL.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        For the <strong>mobile app</strong>, we used Ionic and Angular. An API was added to the web app
+                        to
+                        exchange data between
+                        the 2 apps.
+                    </p>
+                </li>
+            </ul>
+
+
+            <hr>
+
+            <h2>Challenges</h2>
+
+            <p>
+                The problems mentioned above obviously cannot be resolved in 46 hours. Our apps are a proof of concept and are not ready for real world usage.
+            </p>
+            <p>
+                It will hopefully get people (the general public, the emergency services, volunteers and government departments) thinking about incident reporting, management and communication between all the stakeholders.
+            </p>
+            <p>
+                It will hopefully get people thinking about incident reporting, management and communication between all the stakeholders.
+            </p>
+
+            <hr>
+
+            <h2>The Future</h2>
+
+            <p>
+                Significant further development (and back and forth with the stake holders) will be needed to make the apps useable in the real world if there are interested parties (eg NTPFES or NT SES, or interstate emergency services).
+            </p>
+            <p>
+                There are a few government grants available, which might allow us to develop this further.
+            </p>
+
+            <hr>
+
+            <h2>The Team</h2>
+            <ul>
+                <li>
+
+                    <p>
+
+                        <strong>Johan Douma </strong>is the team captain and built the web based app which is used for
+                        the management of the
+                        staff/group and volunteer and the storage of reports made by the public.
+
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <strong>Luke McDonnell</strong> is responsible for the implementation of the Fire & Incident Map
+                        into the mobile
+                        application and the development of the fire reporting feature.
+
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <strong>Regan Lawton</strong> developed the notification system and integration between the
+                        mobile app and web based
+                        management application.
+
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <strong>Wolfgang Kolb</strong> and <strong>Franky So</strong> helped out with the video and
+                        provided ideas, help and information,
+                        supporting the team with their creativity.
+                    </p>
+                </li>
+            </ul>
+
+
+        </div>
+    </div>
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
 {% endblock fos_user_content %}
