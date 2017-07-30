@@ -98,24 +98,31 @@ class DataController extends AppController
         $report->setLng(
             $request->get("lng")
         );
+
         $report->setLat(
             $request->get("lat")
         );
 
         if($request->get("date")) {
             $report->setCreated(
-                \DateTime::createFromFormat('U', $request->get("date"))
+                new \DateTime(date('Y-m-d H:i:s', round($request->get("date")/1000)))
             );
         }
         $report->setIp(
             $request->getClientIp()
         );
+
         $report->setUserAgent(
             $request->headers->get('User-Agent')
         );
 
+
         $this->em()->persist($report);
         $this->em()->flush();
+
+        var_dump($report);
+        die;
+
 
         return $this->renderJSON([]);
     }
