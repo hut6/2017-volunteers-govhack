@@ -47,15 +47,19 @@ class ReportController extends AppController
         $report->setDescription(
             $request->get("description")
         );
+
         $report->setLng(
             $request->get("lng")
         );
         $report->setLat(
             $request->get("lat")
         );
-        $report->setCreated(
-            \DateTime::createFromFormat('U', $request->get("date"))
-        );
+
+        if($request->get("date")) {
+            $report->setCreated(
+                \DateTime::createFromFormat('U', $request->get("date"))
+            );
+        }
         $report->setIp(
             $request->getClientIp()
         );
