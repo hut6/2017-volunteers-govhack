@@ -76,6 +76,8 @@ class EmergencyController extends AppController
                 $volunteer
             );
             $this->em()->persist($enrolment);
+
+            // TODO generate notifications
         }
     }
 

@@ -40,7 +40,6 @@ class VolunteerRepository extends \Doctrine\ORM\EntityRepository
 
     public function getEnrolledVolunteersIds(Emergency $emergency)
     {
-
         $results = $this->createQueryBuilder("vol")
             ->select("vol.id")
             ->innerJoin("vol.enrolments", 'enrol')
