@@ -23,17 +23,24 @@ class DataController extends AppController
      */
     public function listNotificationsAction(Volunteer $volunteer)
     {
-        $qb = $this->em()->getRepository(Notification::class)
+        $em = $this->em();
+        $qb = $em->getRepository(Notification::class)
             ->createQueryBuilder('v')
             ->leftJoin('v.enrolment', 'e')
             ->where('v.volunteer = :volunteer')
             ->orWhere('e.volunteer = :volunteer')
             ->orWhere('e.volunteer = :volunteer')
+            ->andWhere('v.seen IS NULL')
             ->setParameter('volunteer', $volunteer)
         ;
         $data = $qb->getQuery()->getResult();
 
-        $qb->set('v.sent', new \DateTime())->getQuery()->execute();
+        /** @var Notification $item */
+        foreach ($data as $item) {
+            $item->setSent(new \DateTime());
+            $em->persist($item);
+        }
+        $em->flush();
 
         return $this->renderJSON($data);
     }
@@ -44,8 +51,36 @@ class DataController extends AppController
      */
     public function listNotificationReadAction(Notification $notification)
     {
-        $notification->setRead(new \DateTime());
+        $notification->setSeen(new \DateTime());
         $this->update($notification);
+
+        return $this->renderJSON(true);
+    }
+
+    /**
+     * @Route("/notifications/{id}/accept", name="api_notification_accept")
+     * @Method("GET")
+     */
+    public function listNotificationAcceptAction(Notification $notification)
+    {
+        $enrollment = $notification->getEnrolment();
+        $enrollment->setCanDoIt(true);
+        $enrollment->setCanDoItDateTime(new \DateTime());
+        $this->update($enrollment);
+
+        return $this->renderJSON(true);
+    }
+
+    /**
+     * @Route("/notifications/{id}/reject", name="api_notification_reject")
+     * @Method("GET")
+     */
+    public function listNotificationRejectAction(Notification $notification)
+    {
+        $enrollment = $notification->getEnrolment();
+        $enrollment->setCanDoIt(false);
+        $enrollment->setCanDoItDateTime(new \DateTime());
+        $this->update($enrollment);
 
         return $this->renderJSON(true);
     }
