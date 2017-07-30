@@ -9,7 +9,7 @@
 {% endblock page_title %}
 
 {% block page_content %}
-<div style="height: 40vh; overflow: auto">
+<div style="height: 33.6vh; overflow: auto">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -40,7 +40,7 @@
                     </a>
                     <a class="btn btn-primary btn-xs panTo" data-marker="{{ loop.index }}" href="">
                         <i class="fa fa-map-marker"></i>
-                        Highlight on map
+                        Highlight
                     </a>
                     <a class="btn btn-danger btn-xs" href="{{ path('report_ignore', { 'id': report.id }) }}">
                         <i class="fa fa-times-circle"></i>
@@ -57,7 +57,7 @@
     </table>
 </div>
 
-<div class="ga" id="map" style="border:solid 2px #ccc; height: 50vh; margin-bottom: 19px;">
+<div class="ga" id="map" style="border:solid 2px #aaa; height: 50vh; margin-bottom: 19px;">
 
 </div>
 
@@ -81,14 +81,15 @@
     var markers = [];
     var map;
 
-    function addMarker (lat, lng, title) {
+    function addMarker (lat, lng, title, colour) {
 
         var markerLoc = new google.maps.LatLng(lat, lng);
 
         var marker = new google.maps.Marker({
             map: map,
             position: markerLoc,
-            title: title
+            title: title,
+            icon: 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=|'+colour+'|000000'
         });
 
         marker.addListener('click', function() {
@@ -108,7 +109,7 @@
         });
 
         {% for report in reports %}
-            addMarker ({{ report.lat }}, {{ report.lng }}, "Report #{{ report.id }}");
+            addMarker ({{ report.lat }}, {{ report.lng }}, "Report #{{ report.id }}", "{{ colours[loop.index0] }}");
         {% endfor %}
 
         var bounds = new google.maps.LatLngBounds();
@@ -128,6 +129,7 @@
         map.panTo(markers[id].position);
         return false;
     });
+
 </script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrAEBmbgLfeIqyCdvG7_cawiwD-B-1abw&callback=initMap">

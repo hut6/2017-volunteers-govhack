@@ -1,7 +1,25 @@
 {% extends ":volunteer:_layout.html.twig" %}
 
 {% block page_button %}
-    <a class="btn btn-success" href="{{ path('volunteer_new') }}">Add volunteer</a>
+
+    <form action="" method="get" style="display: inline-block; margin: 0 ; vertical-align: middle;">
+
+        <select class="form-control" style="display: inline-block; margin: 0 4px 0 4px; width:180px" name="skill">
+            <option>Show all skills / roles</option>
+            {% for skill in skills %}
+                <option value="{{ skill.id }}">{{ skill }}</option>
+            {% endfor %}
+        </select>
+
+        <button class="btn btn-primary">Apply</button>
+
+    </form>
+
+    &nbsp;
+    &nbsp;
+
+    <a class="btn btn-success" href="{{ path('volunteer_new') }}" style=" vertical-align: middle;">Add volunteer</a>
+
 {% endblock %}
 
 {% block page_content %}

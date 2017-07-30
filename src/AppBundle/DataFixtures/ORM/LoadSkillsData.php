@@ -24,6 +24,18 @@ class LoadSkillsData extends AbstractFixture implements OrderedFixtureInterface
             'Pilot',
         ];
 
+        //grass fires
+        //storm damage
+        //general rescue
+        //vertical rescue
+        //flood rescue
+        //air search
+        //land search
+        //car crash
+        //structuee fire
+        //car fire
+        //non structure fire
+
         foreach ($skills as $name) {
             /** @var Skill $skill */
             $skill = new Skill();

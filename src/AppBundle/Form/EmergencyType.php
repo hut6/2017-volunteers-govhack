@@ -17,8 +17,8 @@ class EmergencyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('description')
-            ->add('emergencyType')
+            ->add('emergencyType', null, ['label' => "Issue type"])
+            ->add('description', null, ['label' => "Issue description"])
             ->add('lat')
             ->add('lon')
             ->add('skills', EntityType::class, array(

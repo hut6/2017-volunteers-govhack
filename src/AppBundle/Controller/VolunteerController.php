@@ -28,6 +28,7 @@ class VolunteerController extends AppController
 
         return $this->render('volunteer/index.html.twig', array(
             'volunteers' => $volunteers,
+            'skills' => $this->em()->getRepository("AppBundle:Skill")->findAll()
         ));
     }
 
