@@ -120,10 +120,6 @@ class DataController extends AppController
         $this->em()->persist($report);
         $this->em()->flush();
 
-        var_dump($report);
-        die;
-
-
         return $this->renderJSON([]);
     }
 }
