@@ -14,20 +14,25 @@ class LoadSkillsData extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         $skills = [
-            'First Aid',
-            'Security',
-            'Heavy Machinery',
-            'Bush Fire Training',
-            'Leadership',
-            'Machinery',
-            'Rescue',
-            'Pilot',
+            [ 'name' => 'Firefighters', 'type' => '1. Paid Staff' ],
+            [ 'name' => 'First Aid', 'type' => '1. Paid Staff' ],
+            [ 'name' => 'Ambos', 'type' => '1. Paid Staff' ],
+            [ 'name' => 'Role 1', 'type' => '1. Paid Staff' ],
+            [ 'name' => 'Role 2', 'type' => '1. Paid Staff' ],
+            [ 'name' => 'Volunteer Firefighters (eg Emily Hill)', 'type' => '2. Volunteers' ],
+            [ 'name' => 'Spotters', 'type' => '2. Volunteers' ],
+            [ 'name' => 'Sacred Tree Preservation', 'type' => '2. Volunteers' ],
+            [ 'name' => 'Media', 'type' => '3. Other' ]
         ];
 
         foreach ($skills as $name) {
+
             /** @var Skill $skill */
             $skill = new Skill();
-            $skill->setName($name);
+
+            $skill->setName($name['name']);
+            $skill->setType($name['type']);
+
             $manager->persist($skill);
         }
 

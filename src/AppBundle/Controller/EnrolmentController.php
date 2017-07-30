@@ -8,6 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class EnrolmentController
+ * @package AppBundle\Controller
+ */
 class EnrolmentController extends AppController
 {
     /**
@@ -17,15 +21,7 @@ class EnrolmentController extends AppController
     {
         $volunteers = $this->em()->getRepository("AppBundle:Volunteer")->findUnenrolledBySkills($emergency, $emergency->getSkills());
 
-        foreach ($volunteers as $volunteer) {
-            $enrolment = new VolunteerEnrolment(
-                $emergency,
-                $volunteer
-            );
-            $this->em()->persist($enrolment);
-        }
-
-        $this->em()->flush();
+        $this->enrolVolunteers($emergency, $volunteers);
 
         return $this->render(':enrolment:list.html.twig', [
             "emergency" => $emergency,
@@ -44,7 +40,23 @@ class EnrolmentController extends AppController
         return $this->redirectToRoute('app_enrolment_list', [
             "id" => $enrolment->getEmergency()->getId(),
         ]);
+    }
 
+    /**
+     * @param Emergency $emergency
+     * @param $volunteers
+     */
+    private function enrolVolunteers (Emergency $emergency, $volunteers) {
+
+        foreach ($volunteers as $volunteer) {
+            $enrolment = new VolunteerEnrolment(
+                $emergency,
+                $volunteer
+            );
+            $this->em()->persist($enrolment);
+        }
+
+        $this->em()->flush();
     }
 
     /**

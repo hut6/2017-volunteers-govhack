@@ -10,4 +10,17 @@ namespace AppBundle\Repository;
  */
 class ReportRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function findRecent() {
+
+        return $this
+            ->createQueryBuilder("reports")
+            ->where("reports.archive = 0")
+            ->andWhere("reports.created > :date")->setParameter(":date", new \DateTime("-2 days"))
+            ->orderBy("reports.id", "DESC")
+            ->getQuery()
+            ->execute();
+
+    }
+
 }
