@@ -1,12 +1,7 @@
-# Mobilize 
+# Mobilize
 
+For more information, visit [mobilize.team/intro](https://mobilize.team/intro)
 
-        "build:dev": [
-            "bin/console doctrine:database:drop --force --if-exists",
-            "bin/console doctrine:database:create",
-            "@load:fixtures"
-        ],
-        "load:fixtures": [
-            "bin/console doctrine:migrations:migrate -n --allow-no-migration",
-            "bin/console doctrine:fixtures:load -n"
-        ],
+This is the Web App repository
+
+For the Mobile App, go to [github.com/hut6/govhack2017-mobilize-mobileapp](https://github.com/hut6/govhack2017-mobilize-mobileapp)
