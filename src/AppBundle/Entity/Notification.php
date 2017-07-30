@@ -191,7 +191,7 @@ class Notification implements \JsonSerializable
         return [
             'id' => $this->getId(),
             'enrollment' => $this->getEnrolment(),
-            'type' => $this->getNotificationType(),
+            'category' => $this->getNotificationType(),
             'sent' => $this->getSent(),
             'read' => $this->getSent(),
             'created' => $this->getCreated(),
