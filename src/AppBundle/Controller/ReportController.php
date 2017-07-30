@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Report controller.
@@ -31,6 +32,41 @@ class ReportController extends AppController
             'reports' => $reports,
             'colours' => $this->generateColours(count($reports)),
         ]);
+    }
+
+    /**
+     * Lists all report entities.
+     *
+     * @Route("/import", name="report_import")
+     * @Method("GET")
+     */
+    public function importFromApp (Request $request) {
+
+        $report = new Report();
+
+        $report->setDescription(
+            $request->get("description")
+        );
+        $report->setLng(
+            $request->get("lng")
+        );
+        $report->setLat(
+            $request->get("lat")
+        );
+        $report->setCreated(
+            \DateTime::createFromFormat('U', $request->get("date"))
+        );
+        $report->setIp(
+            $request->getClientIp()
+        );
+        $report->setUserAgent(
+            $request->headers->get('User-Agent')
+        );
+
+        $this->em()->persist($report);
+        $this->em()->flush();
+
+        return new Response();
     }
 
     public function generateColours($number)
