@@ -35,44 +35,9 @@ class ReportController extends AppController
     }
 
     /**
-     * Lists all report entities.
-     *
-     * @Route("/import", name="report_import")
-     * @Method("GET")
+     * @param $number
+     * @return array
      */
-    public function importFromApp (Request $request) {
-
-        $report = new Report();
-
-        $report->setDescription(
-            $request->get("description")
-        );
-
-        $report->setLng(
-            $request->get("lng")
-        );
-        $report->setLat(
-            $request->get("lat")
-        );
-
-        if($request->get("date")) {
-            $report->setCreated(
-                \DateTime::createFromFormat('U', $request->get("date"))
-            );
-        }
-        $report->setIp(
-            $request->getClientIp()
-        );
-        $report->setUserAgent(
-            $request->headers->get('User-Agent')
-        );
-
-        $this->em()->persist($report);
-        $this->em()->flush();
-
-        return new Response();
-    }
-
     public function generateColours($number)
     {
         $start = [255, 30, 20];
@@ -84,6 +49,12 @@ class ReportController extends AppController
         return $colours;
     }
 
+    /**
+     * @param $c1
+     * @param $c2
+     * @param $nc
+     * @return array
+     */
     public function graduateRGB($c1, $c2, $nc)
     {
         $c = [];

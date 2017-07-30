@@ -55,4 +55,19 @@ class GentelellaController extends AppController
     {
         return $this->redirectToRoute("emergency_index");
     }
+
+    /**
+     * @Route("/intro", name="app_homepage")
+     *
+     * @param Request $request Request
+     *
+     * @return Response
+     */
+    public function introAction(Request $request)
+    {
+        return $this->render(
+            ":app/pages:introduction.html.twig",
+            []
+        );
+    }
 }

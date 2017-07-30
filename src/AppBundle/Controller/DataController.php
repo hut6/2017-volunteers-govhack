@@ -9,6 +9,8 @@ use AppBundle\Entity\Volunteer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Route("/api/v1")
@@ -77,5 +79,45 @@ class DataController extends AppController
     {
         $data = $this->em()->getRepository(Report::class)->findAll();
         return $this->renderJSON($data);
+    }
+
+
+    /**
+     * Lists all report entities.
+     *
+     * @Route("/import", name="report_import")
+     * @Method("GET")
+     */
+    public function importFromApp (Request$request) {
+
+        $report = new Report();
+
+        $report->setDescription(
+            $request->get("description")
+        );
+
+        $report->setLng(
+            $request->get("lng")
+        );
+        $report->setLat(
+            $request->get("lat")
+        );
+
+        if($request->get("date")) {
+            $report->setCreated(
+                \DateTime::createFromFormat('U', $request->get("date"))
+            );
+        }
+        $report->setIp(
+            $request->getClientIp()
+        );
+        $report->setUserAgent(
+            $request->headers->get('User-Agent')
+        );
+
+        $this->em()->persist($report);
+        $this->em()->flush();
+
+        return new Response();
     }
 }
