@@ -58,6 +58,34 @@ class DataController extends AppController
     }
 
     /**
+     * @Route("/notifications/{id}/accept", name="api_notification_accept")
+     * @Method("GET")
+     */
+    public function listNotificationAcceptAction(Notification $notification)
+    {
+        $enrollment = $notification->getEnrolment();
+        $enrollment->setCanDoIt(true);
+        $enrollment->setCanDoItDateTime(new \DateTime());
+        $this->update($enrollment);
+
+        return $this->renderJSON(true);
+    }
+
+    /**
+     * @Route("/notifications/{id}/reject", name="api_notification_reject")
+     * @Method("GET")
+     */
+    public function listNotificationRejectAction(Notification $notification)
+    {
+        $enrollment = $notification->getEnrolment();
+        $enrollment->setCanDoIt(false);
+        $enrollment->setCanDoItDateTime(new \DateTime());
+        $this->update($enrollment);
+
+        return $this->renderJSON(true);
+    }
+
+    /**
      * @Route("/volunteer", name="api_volunteer_list")
      * @Method("GET")
      * @Security("is_granted('ROLE_ADMIN')")
