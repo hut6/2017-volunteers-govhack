@@ -36,6 +36,13 @@ class Skill implements \JsonSerializable
     private $name;
 
     /**
+     * @var string $type
+     *
+     * @ORM\Column(name="type", type="string", length=255, nullable=true)
+     */
+    private $type;
+
+    /**
      * @var Emergency[]|Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Emergency", mappedBy="skills", cascade={"persist"})
@@ -124,6 +131,22 @@ class Skill implements \JsonSerializable
     public function jsonSerialize()
     {
         return $this->getName();
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
     }
 
 }

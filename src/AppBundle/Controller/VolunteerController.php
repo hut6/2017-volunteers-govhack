@@ -20,11 +20,15 @@ class VolunteerController extends AppController
      * @Route("/", name="volunteer_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $volunteers = $em->getRepository(Volunteer::class)->findAll();
+        if($request->get('skill')) {
+            $volunteers = $em->getRepository(Volunteer::class)->findBySkills([$request->get('skill')]);
+        } else {
+            $volunteers = $em->getRepository(Volunteer::class)->findAll();
+        }
 
         return $this->render('volunteer/index.html.twig', array(
             'volunteers' => $volunteers,

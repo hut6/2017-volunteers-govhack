@@ -14,7 +14,7 @@ use Doctrine\Common\Collections\Collection;
  */
 class VolunteerRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findBySkills(Collection $kills)
+    public function findBySkills($kills)
     {
         return $this->createQueryBuilder("vol")
             ->innerJoin("vol.skills", 'skills')

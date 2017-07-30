@@ -51,13 +51,7 @@ class EmergencyController extends AppController
 
             $volunteers = $em->getRepository("AppBundle:Volunteer")->findBySkills($emergency->getSkills());
 
-            foreach ($volunteers as $volunteer) {
-                $enrolment = new VolunteerEnrolment(
-                    $emergency,
-                    $volunteer
-                );
-                $em->persist($enrolment);
-            }
+            $this->enrolVolunteers($emergency, $volunteers);
 
             $em->flush();
 
@@ -68,6 +62,21 @@ class EmergencyController extends AppController
             'emergency' => $emergency,
             'form' => $form->createView(),
         ));
+    }
+
+
+    /**
+     * @param Emergency $emergency
+     * @param $volunteers
+     */
+    private function enrolVolunteers (Emergency $emergency, $volunteers) {
+        foreach ($volunteers as $volunteer) {
+            $enrolment = new VolunteerEnrolment(
+                $emergency,
+                $volunteer
+            );
+            $this->em()->persist($enrolment);
+        }
     }
 
     /**
@@ -86,13 +95,7 @@ class EmergencyController extends AppController
 
             $volunteers = $this->em()->getRepository("AppBundle:Volunteer")->findUnenrolledBySkills($emergency, $emergency->getSkills());
 
-            foreach ($volunteers as $volunteer) {
-                $enrolment = new VolunteerEnrolment(
-                    $emergency,
-                    $volunteer
-                );
-                $this->em()->persist($enrolment);
-            }
+            $this->enrolVolunteers($emergency, $volunteers);
 
             $this->em()->flush();
 
