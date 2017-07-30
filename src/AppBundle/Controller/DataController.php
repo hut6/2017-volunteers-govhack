@@ -117,6 +117,6 @@ class DataController extends AppController
         $this->em()->persist($report);
         $this->em()->flush();
 
-        return new Response();
+        return $this->renderJSON([]);
     }
 }
