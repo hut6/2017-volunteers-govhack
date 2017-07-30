@@ -39,10 +39,10 @@ class DataController extends AppController
     }
 
     /**
-     * @Route("/notifications/{id}/read", name="api_notification_list")
+     * @Route("/notifications/{id}/read", name="api_notification_read")
      * @Method("GET")
      */
-    public function listNotificatioReadAction(Notification $notification)
+    public function listNotificationReadAction(Notification $notification)
     {
         $notification->setRead(new \DateTime());
         $this->update($notification);
