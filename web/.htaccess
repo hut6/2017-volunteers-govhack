@@ -53,6 +53,10 @@ DirectoryIndex app.php
     RewriteCond %{REQUEST_FILENAME} -f
     RewriteRule ^ - [L]
 
+    # Force Secure (SSL) Pages
+   RewriteCond %{HTTPS} !on
+   RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
     # Rewrite all other queries to the front controller.
     RewriteRule ^ %{ENV:BASE}/app.php [L]
 </IfModule>
