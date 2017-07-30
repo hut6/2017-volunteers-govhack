@@ -81,14 +81,13 @@ class DataController extends AppController
         return $this->renderJSON($data);
     }
 
-
     /**
      * Lists all report entities.
      *
-     * @Route("/import", name="report_import")
+     * @Route("/import", name="api_report_import")
      * @Method("GET")
      */
-    public function importFromApp (Request$request) {
+    public function importFromApp (Request $request) {
 
         $report = new Report();
 
