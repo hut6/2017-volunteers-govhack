@@ -146,15 +146,6 @@ class Volunteer implements \JsonSerializable
         $this->skills = $skills;
     }
 
-    public function jsonSerialize()
-    {
-        return [
-            'name' => $this->getName(),
-            'email' => $this->getEmail(),
-            'skills' => $this->getSkills(),
-        ];
-    }
-
     /**
      * @return VolunteerEnrolment[]|Collection
      */
@@ -187,5 +178,13 @@ class Volunteer implements \JsonSerializable
         $this->phone = $phone;
     }
 
+    public function jsonSerialize()
+    {
+        return [
+            'name' => $this->getName(),
+            'email' => $this->getEmail(),
+            'skills' => $this->getSkills(),
+        ];
+    }
 }
 

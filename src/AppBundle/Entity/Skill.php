@@ -123,7 +123,9 @@ class Skill implements \JsonSerializable
 
     public function jsonSerialize()
     {
-        return $this->getName();
+        return [
+            'label' => $this->getName()
+        ];
     }
 
 }

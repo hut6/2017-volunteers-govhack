@@ -14,7 +14,7 @@ class Notification implements \JsonSerializable
 {
     const TYPE_GENERAL = 'general';
     const TYPE_WARNING = 'warning';
-    const TYPE_ENROLMENT_ACCEPT = 'accept';
+    const TYPE_ENROLMENT_NEW = 'new_enrollment';
     const TYPE_ENROLMENT_REJECT = 'reject';
     const TYPE_ENROLMENT_CANCEL = 'cancel';
     const TYPE_ENROLMENT_CONFIRM = 'confirm';
@@ -47,23 +47,38 @@ class Notification implements \JsonSerializable
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=false)
      */
-    private $type;
+    private $notificationType;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
-    private $read;
+    private $seen;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $sent;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $created;
+
+    /**
+     * Notification constructor.
+     */
+    public function __construct()
+    {
+        $this->created = new \DateTime();
+    }
 
     /**
      * Get id
@@ -78,7 +93,7 @@ class Notification implements \JsonSerializable
     /**
      * @return VolunteerEnrolment
      */
-    public function getEnrolment(): VolunteerEnrolment
+    public function getEnrolment()
     {
         return $this->enrolment;
     }
@@ -94,7 +109,7 @@ class Notification implements \JsonSerializable
     /**
      * @return Volunteer
      */
-    public function getVolunteer(): Volunteer
+    public function getVolunteer()
     {
         return $this->volunteer;
     }
@@ -110,39 +125,39 @@ class Notification implements \JsonSerializable
     /**
      * @return string
      */
-    public function getType(): string
+    public function getNotificationType()
     {
-        return $this->type;
+        return $this->notificationType;
     }
 
     /**
-     * @param string $type
+     * @param string $notificationType
      */
-    public function setType(string $type)
+    public function setNotificationType(string $notificationType)
     {
-        $this->type = $type;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getRead(): \DateTime
-    {
-        return $this->read;
-    }
-
-    /**
-     * @param \DateTime $read
-     */
-    public function setRead(\DateTime $read)
-    {
-        $this->read = $read;
+        $this->notificationType = $notificationType;
     }
 
     /**
      * @return \DateTime
      */
-    public function getSent(): \DateTime
+    public function getSeen()
+    {
+        return $this->seen;
+    }
+
+    /**
+     * @param \DateTime $seen
+     */
+    public function setSeen(\DateTime $seen)
+    {
+        $this->seen = $seen;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getSent()
     {
         return $this->sent;
     }
@@ -155,13 +170,31 @@ class Notification implements \JsonSerializable
         $this->sent = $sent;
     }
 
+    /**
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param \DateTime $created
+     */
+    public function setCreated(\DateTime $created)
+    {
+        $this->created = $created;
+    }
+
     public function jsonSerialize()
     {
         return [
             'id' => $this->getId(),
-            'enrolment' => $this->getEnrolment(),
-            'type' => $this->getType(),
+            'enrollment' => $this->getEnrolment(),
+            'type' => $this->getNotificationType(),
             'sent' => $this->getSent(),
+            'read' => $this->getSent(),
+            'created' => $this->getCreated(),
         ];
     }
 
